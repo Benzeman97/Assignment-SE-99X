@@ -9,4 +9,4 @@ spring:
     config:
       server:
         git:
-          uri: "D://Final Year Project/assignment"
+          uri: "https://github.com/Benzeman97/Assignment-Config-Repo"
