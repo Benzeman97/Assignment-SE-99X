@@ -32,6 +32,10 @@ public class PriceController {
     @PostMapping(value = "/total", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
     private ResponseEntity<TotalPrice> getTotalPrice(@RequestBody TotalPrice totalPrice) {
 
+       totalPrice.getProducts().forEach(p->{
+           System.out.println(p.getQuantity());
+       });
+
         if (totalPrice.getProducts().size() != 0)
             return new ResponseEntity<>(priceService.getTotalPrice(totalPrice), HttpStatus.OK);
         else

@@ -1,7 +1,7 @@
 import React from 'react';
 
 function ProductTotals({value}) {
-    const {productTotal}=value;
+    const {totalPrice}=value;
 
     return (
         <React.Fragment>
@@ -10,7 +10,7 @@ function ProductTotals({value}) {
                     <div className="col-10 mt-2 ml-sm-5 ml-md-auto col-sm-8 text-capitalize text-right">
                        <h3>
                            <span className="text-title">
-                               Total : <strong>${productTotal}</strong>
+                               Total : <strong>${totalPrice.total}</strong>
                            </span>
                        </h3>
                     </div>
