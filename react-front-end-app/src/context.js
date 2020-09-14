@@ -75,7 +75,7 @@ class ProductProvider extends Component {
 
         const index=tempProducts.indexOf(selectedProduct);
 
-        const product=tempProducts[0];
+        const product=tempProducts[index];
 
         product.quantity=product.quantity+1;
 

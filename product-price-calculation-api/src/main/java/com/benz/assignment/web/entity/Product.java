@@ -35,5 +35,8 @@ public class Product {
     @Transient
     private int quantity;
 
+    @Transient
+    private double priceByUnit;
+
 
 }

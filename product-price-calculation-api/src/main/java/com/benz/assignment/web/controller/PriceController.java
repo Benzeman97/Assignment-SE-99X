@@ -1,6 +1,6 @@
 package com.benz.assignment.web.controller;
 
-import com.benz.assignment.web.model.ProductPrice;
+import com.benz.assignment.web.entity.Product;
 import com.benz.assignment.web.model.TotalPrice;
 import com.benz.assignment.web.service.PriceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,16 +22,16 @@ public class PriceController {
     }
 
     @PostMapping
-    private ResponseEntity<ProductPrice> getProductPrice(@RequestBody ProductPrice price) {
-        if (price.getProduct().getProductId() != 0 && price.getProduct().getQuantity() != 0) {
-            return new ResponseEntity<>(priceService.getProductPrice(price), HttpStatus.OK);
+    private ResponseEntity<Product> getProductPrice(@RequestBody Product product) {
+        if (product.getProductId() != 0 && product.getQuantity() != 0) {
+            return new ResponseEntity<>(priceService.getProductPrice(product), HttpStatus.OK);
         } else
             throw new NullPointerException();
     }
 
     @PostMapping(value = "/total", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
     private ResponseEntity<TotalPrice> getTotalPrice(@RequestBody TotalPrice totalPrice) {
-        
+
         if (totalPrice.getProducts().size() != 0)
             return new ResponseEntity<>(priceService.getTotalPrice(totalPrice), HttpStatus.OK);
         else

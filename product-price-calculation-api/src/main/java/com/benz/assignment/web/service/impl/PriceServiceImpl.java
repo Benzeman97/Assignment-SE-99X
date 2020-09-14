@@ -3,7 +3,6 @@ package com.benz.assignment.web.service.impl;
 import com.benz.assignment.web.dao.ProductDAO;
 import com.benz.assignment.web.entity.Product;
 import com.benz.assignment.web.exception.DataNotFoundException;
-import com.benz.assignment.web.model.ProductPrice;
 import com.benz.assignment.web.model.TotalPrice;
 import com.benz.assignment.web.service.PriceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,19 +36,19 @@ public class PriceServiceImpl implements PriceService {
     public double increaseInPercentage;
 
     @Override
-    public ProductPrice getProductPrice(ProductPrice price) {
+    public Product getProductPrice(Product prod) {
+        Product product=null;
         try {
-            Product product = productDAO.getProductById(price.getProduct().getProductId()).orElseThrow(() -> new DataNotFoundException(
-                    "Data Not Available With " + price.getProduct().getProductId()));
-            product.setQuantity(price.getProduct().getQuantity());
+            product = productDAO.getProductById(prod.getProductId()).orElseThrow(() -> new DataNotFoundException(
+                    "Data Not Available With " + prod.getProductId()));
+            product.setQuantity(prod.getQuantity());
             double productPrice = priceCalculation(product.getQuantity(), product.getNumberOfUnitInCartoon(),
                     product.getPriceOfCartoon());
-            price.setProductPrice(productPrice);
-            price.setProduct(product);
+            product.setPriceByUnit(productPrice);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
-        return price;
+        return product;
     }
 
     @Override
@@ -61,6 +60,8 @@ public class PriceServiceImpl implements PriceService {
             Product product = productDAO.getProductById(p.getProductId())
                     .orElseThrow(() -> new DataNotFoundException("Product Not Found with " + p.getProductId()));
             product.setQuantity(p.getQuantity());
+            if(product.getQuantity()!=0)
+            product.setPriceByUnit(priceCalculation(product.getQuantity(),product.getNumberOfUnitInCartoon(),product.getPriceOfCartoon()));
             products.add(product);
         });
         totalPrice.setProducts(products);
@@ -93,7 +94,7 @@ public class PriceServiceImpl implements PriceService {
 
     }
 
-    private double priceCalculation(int quantity, int numOfUnit, double priceOfCartoon) throws Exception {
+    private double priceCalculation(int quantity, int numOfUnit, double priceOfCartoon){
         double price = 0.0;
 
         int cartoonByUnit = quantity / numOfUnit;

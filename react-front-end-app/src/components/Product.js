@@ -5,10 +5,8 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 
 function Product({product,value}) {
 
-    const {productId,productName,numOfUnit,priceOfCartoon,urlOfImage,quantity}=product;
-    const {increment,decrement,removeProduct,totalPrice}=value;
-
-    console.log(`you total ${totalPrice.total}`);
+    const {productId,productName,priceOfCartoon,urlOfImage,quantity,priceByUnit}=product;
+    const {increment,decrement,removeProduct}=value;
 
     return (
         <div className="row my-5 text-capitalize text-center">
@@ -46,7 +44,7 @@ function Product({product,value}) {
                 </div>
             </div>
             <div className="col-10 max-auto col-lg-2">
-                <strong>Product Total : $ 0</strong>
+                <strong>Product Total : $ {priceByUnit}</strong>
             </div>
         </div>
     );
