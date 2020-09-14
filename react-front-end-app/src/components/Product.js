@@ -8,6 +8,9 @@ function Product({product,value}) {
     const {productId,productName,priceOfCartoon,urlOfImage,quantity,priceByUnit}=product;
     const {increment,decrement,removeProduct}=value;
 
+    console.log(quantity);
+    console.log(priceByUnit);
+
     return (
         <div className="row my-5 text-capitalize text-center">
             <div className="col-10 mx-auto col-lg-2">
