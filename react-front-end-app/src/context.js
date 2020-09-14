@@ -55,8 +55,11 @@ class ProductProvider extends Component {
            this.setState({
                isLoaded:true,
                totalPrice:result,
+               products:result.products
            },()=>{
-            console.log(this.state.totalPrice);
+            this.state.totalPrice.products.forEach(p=>{
+                console.log(`price By Single Unit ${p.priceByUnit}`);
+            })
            })
         },error=>{
             this.setState({

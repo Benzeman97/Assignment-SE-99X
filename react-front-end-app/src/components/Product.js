@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {faTrash} from '@fortawesome/free-solid-svg-icons';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 
@@ -6,10 +6,9 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 function Product({product,value}) {
 
     const {productId,productName,priceOfCartoon,urlOfImage,quantity,priceByUnit}=product;
-    const {increment,decrement,removeProduct}=value;
+    const {increment,decrement,removeProduct,totalPrice}=value;
 
-    console.log(quantity);
-    console.log(priceByUnit);
+    console.log(totalPrice)
 
     return (
         <div className="row my-5 text-capitalize text-center">
