@@ -83,17 +83,20 @@ class ProductProvider extends Component {
         product.quantity=product.quantity+1;
 
         this.sendRequest();
-        //todo
-        // this.setState({
-            
-        // },()=>{
-        //     console.log(`count is ${this.state.productTotal.quantity}`);
-        // })
     }
 
     decrement=(id)=>{
-        //todo
-        console.log('decrement Method');
+        let tempProducts=[...this.state.products];
+
+        const selectedProduct=tempProducts.find(prod=>prod.productId===id);
+
+        const index=tempProducts.indexOf(selectedProduct);
+
+        const product=tempProducts[index];
+
+        product.quantity=product.quantity-1;
+
+        this.sendRequest();
     }
 
     removeProduct=(id)=>{
