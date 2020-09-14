@@ -2,7 +2,6 @@ package com.benz.assignment.web.service.impl;
 
 import com.benz.assignment.web.dao.ProductDAO;
 import com.benz.assignment.web.entity.Product;
-import com.benz.assignment.web.model.ProductPrice;
 import com.benz.assignment.web.model.TotalPrice;
 import com.benz.assignment.web.service.PriceService;
 import org.junit.Assert;
@@ -30,27 +29,27 @@ public class PriceServiceImplTest {
 
     @Test
     public void calculateProductPriceForSingleUnits() throws Exception {
-        ProductPrice productPrice = getProductPrice();
-        Optional<Product> product = Optional.of(productPrice.getProduct());
-        Mockito.when(productDAO.getProductById(productPrice.getProduct().getProductId()))
+       Product prod=getProduct();
+        Optional<Product> product = Optional.of(prod);
+        Mockito.when(productDAO.getProductById(prod.getProductId()))
                 .thenReturn(product);
-        ProductPrice newProductPrice = priceService.getProductPrice(productPrice);
-        double price = priceService.getProductPrice(newProductPrice).getProductPrice();
+        Product newProduct = priceService.getProductPrice(prod);
+        double price = newProduct.getPriceByUnit();
         Assert.assertEquals(price, 175.00, 0.0);
 
     }
 
     @Test
     public void calculateProductPriceWithCartoon() {
-        ProductPrice productPrice = getTotalPrice();
-        Product prod=productPrice.getProduct();
+
+        Product prod=getProduct();
         prod.setQuantity(25);
         Optional<Product> product = Optional.of(prod);
-        Mockito.when(productDAO.getProductById(productPrice.getProduct().getProductId()))
+        Mockito.when(productDAO.getProductById(prod.getProductId()))
                 .thenReturn(product);
-        ProductPrice newProductPrice = priceService.getProductPrice(productPrice);
+        Product newProduct= priceService.getProductPrice(prod);
 
-        Assert.assertEquals(newProductPrice.getProductPrice(), 218.75, 0.0);
+        Assert.assertEquals(newProduct.getPriceByUnit(), 218.75, 0.0);
     }
 
     @Test
@@ -64,18 +63,6 @@ public class PriceServiceImplTest {
             price += priceService.getTotalPrice(totalPrice).getTotal();
         }
         Assert.assertEquals(1000, price, 0.0);
-    }
-
-    private ProductPrice getProductPrice() {
-        ProductPrice productPrice = new ProductPrice();
-        productPrice.setProduct(getProduct());
-        return productPrice;
-    }
-
-    private ProductPrice getTotalPrice() {
-        ProductPrice productPrice = new ProductPrice();
-        productPrice.setProduct(getProduct());
-        return productPrice;
     }
 
     private TotalPrice getTotalPrice_2() {
