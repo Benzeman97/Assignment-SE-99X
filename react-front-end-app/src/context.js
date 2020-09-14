@@ -19,29 +19,36 @@ class ProductProvider extends Component {
 
     componentDidMount()
     {
-        fetch('http://localhost:9090/products')
-         .then(res=>res.json())
-         .then(result=>{
-            this.setState({
-                isLoaded:true,
-                products:result
-            },()=>{
-                console.log(result);
-            });
-         },error=>{
-             this.setState({
-                 isLoaded:true,
-                 error
-             })
-         }
-         );
+         this.getAllProducts();
     }
 
-    sendRequest=()=>{
+    getAllProducts=()=>{
+        fetch('http://localhost:9090/products')
+        .then(res=>res.json())
+        .then(result=>{
+           this.setState({
+               isLoaded:true,
+               products:result
+           },()=>{
+               console.log(result);
+           });
+        },error=>{
+            this.setState({
+                isLoaded:true,
+                error
+            })
+        }
+        );
+    }
+
+    incrementAndDecrement=()=>{
 
         fetch('http://localhost:9090/price/total',{
             method:'POST',
-            headers: {'Content-Type':'application/json'},
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type':'application/json'
+            },
             body: JSON.stringify({
 
                     products:this.state.products
@@ -70,6 +77,29 @@ class ProductProvider extends Component {
 
     }
 
+    deleteProduct=(product)=>{
+        fetch('http://localhost:9090/products/delete',{
+            headers:{
+                'Accept': 'application/json',
+            },
+            method:'DELETE',
+            body:JSON.stringify({
+                product:product
+            })
+        })
+            .then(()=>{
+                this.setState({
+                     isLoaded:true
+                })
+            },error=>{
+                this.setState({
+                    isLoaded:true,
+                    error
+                })
+            });
+        this.getAllProducts();
+    }
+
     increment=(id)=>{
 
         let tempProducts=[...this.state.products];
@@ -82,10 +112,11 @@ class ProductProvider extends Component {
 
         product.quantity=product.quantity+1;
 
-        this.sendRequest();
+         this.incrementAndDecrement();
     }
 
     decrement=(id)=>{
+        
         let tempProducts=[...this.state.products];
 
         const selectedProduct=tempProducts.find(prod=>prod.productId===id);
@@ -96,12 +127,20 @@ class ProductProvider extends Component {
 
         product.quantity=product.quantity-1;
 
-        this.sendRequest();
+        this.incrementAndDecrement();
     }
 
     removeProduct=(id)=>{
-        //todo
+        
        let tempProducts=[...this.state.products];
+
+       const selectedProduct=tempProducts.find(prod=>prod.productId===id);
+       
+       const index=tempProducts.indexOf(selectedProduct);
+
+       const deleteProduct= tempProducts[index];
+
+       this.deleteProduct(deleteProduct);
 
     }
 
