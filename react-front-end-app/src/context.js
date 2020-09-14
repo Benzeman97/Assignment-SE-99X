@@ -79,10 +79,10 @@ class ProductProvider extends Component {
 
     deleteProduct=(product)=>{
         fetch('http://localhost:9090/products/delete',{
-            headers:{
-                'Accept': 'application/json',
-            },
             method:'DELETE',
+            headers:{
+                'content-type':'application/json'
+            },
             body:JSON.stringify({
                 product:product
             })
@@ -98,6 +98,12 @@ class ProductProvider extends Component {
                 })
             });
         this.getAllProducts();
+    }
+
+    getProduct=(id)=>{
+         const product=this.state.products.find(prod=>prod.productId===id);
+
+         console.log(product);
     }
 
     increment=(id)=>{
@@ -131,14 +137,8 @@ class ProductProvider extends Component {
     }
 
     removeProduct=(id)=>{
-        
-       let tempProducts=[...this.state.products];
 
-       const selectedProduct=tempProducts.find(prod=>prod.productId===id);
-       
-       const index=tempProducts.indexOf(selectedProduct);
-
-       const deleteProduct= tempProducts[index];
+       const deleteProduct= this.getProduct(id);
 
        this.deleteProduct(deleteProduct);
 
