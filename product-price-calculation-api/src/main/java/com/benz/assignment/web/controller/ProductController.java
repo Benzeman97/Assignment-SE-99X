@@ -46,9 +46,7 @@ public class ProductController {
 
     @DeleteMapping(value = "/delete", consumes = {MediaType.APPLICATION_JSON_VALUE})
     public void deleteProduct(@RequestBody Product product) throws Exception {
-
-        System.out.println(product.getProductId());
-
+        
         if (product.getProductId() != 0 && !product.getProductName().trim().isEmpty() &&
                 product.getNumberOfUnitInCartoon() != 0 && product.getPriceOfCartoon() != 0.0)
             productService.deleteProduct(product);
