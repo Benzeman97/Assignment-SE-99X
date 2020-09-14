@@ -56,13 +56,15 @@ public class PriceServiceImplTest {
     public void calculateTotalPriceWithMultipleProducts() {
         double price = 0.0;
         TotalPrice totalPrice = getTotalPrice_2();
-        for (Product prod : totalPrice.getProducts()) {
-            Optional<Product> product = Optional.of(prod);
-            Mockito.when(productDAO.getProductById(prod.getProductId()))
+        for(Product p :totalPrice.getProducts())
+        {
+            Optional<Product> product = Optional.of(p);
+            Mockito.when(productDAO.getProductById(p.getProductId()))
                     .thenReturn(product);
-            price += priceService.getTotalPrice(totalPrice).getTotal();
+
         }
-        Assert.assertEquals(1000, price, 0.0);
+        TotalPrice nTotalPrice=priceService.getTotalPrice(totalPrice);
+        Assert.assertEquals(nTotalPrice.getTotal(),1000, 0.0);
     }
 
     private TotalPrice getTotalPrice_2() {
