@@ -1,0 +1,8 @@
+
+insert all
+ into Product (product_id,product_name,number_of_unit,price_of_cartoon,url_of_image) values ('Penguin-ears',
+   20,175.00,'https://i.ibb.co/pLdM7FL/shutterstock-306427430-scaled.jpg')
+ into Product (product_id,product_name,number_of_unit,price_of_cartoon,url_of_image)
+   values ('Horseshoe',5,825.00,'https://i.ibb.co/MRDwnqj/horseshoe.jpg')
+
+   select * from dual;
