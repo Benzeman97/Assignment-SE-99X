@@ -6,8 +6,9 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 function Product({product,value}) {
 
     const {productId,productName,numOfUnit,priceOfCartoon,urlOfImage,quantity}=product;
-    const {increment,decrement,removeProduct,count}=value;
+    const {increment,decrement,removeProduct,totalPrice}=value;
 
+    console.log(`you total ${totalPrice.total}`);
 
     return (
         <div className="row my-5 text-capitalize text-center">

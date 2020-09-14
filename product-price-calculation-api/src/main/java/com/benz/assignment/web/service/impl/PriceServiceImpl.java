@@ -77,6 +77,7 @@ public class PriceServiceImpl implements PriceService {
         List<Double> amount = totalPrice.getProducts().stream().map(product -> {
             double price = 0.0;
             try {
+                if(product.getQuantity()!=0)
                 price = priceCalculation(product.getQuantity(), product.getNumberOfUnitInCartoon()
                         , product.getPriceOfCartoon());
             } catch (Exception e) {
