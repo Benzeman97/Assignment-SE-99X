@@ -2,12 +2,9 @@ import React from 'react';
 import Product from './Product';
 
 function ProductList({value}) {
-    const {products}=value;
+    const {products,totalPrice}=value;
 
-    console.log(products);
-    products.forEach(prod => {
-        console.log(products.productName);
-    });
+    console.log(`hello benz ${totalPrice.products}`)
 
     return (
         <div className="container-fluid">
