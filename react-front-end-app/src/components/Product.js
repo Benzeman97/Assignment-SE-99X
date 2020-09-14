@@ -8,8 +8,6 @@ function Product({product,value}) {
     const {productId,productName,priceOfCartoon,urlOfImage,quantity,priceByUnit}=product;
     const {increment,decrement,removeProduct,totalPrice}=value;
 
-    console.log(totalPrice)
-
     return (
         <div className="row my-5 text-capitalize text-center">
             <div className="col-10 mx-auto col-lg-2">
@@ -27,7 +25,7 @@ function Product({product,value}) {
             <div className="col-10 mx-auto col-lg-2 my-2 my-lg-0">
                 <div className="d-flex justify-content-center">
                     <div>
-                        <span className="btn btn-black mx-1" onClick={()=>decrement(productId)}>
+                        <span className="btn btn-black mx-1" onClick={()=>(quantity>0)?decrement(productId):null}>
                            -
                         </span>
                         <span className="btn btn-black mx-1"> {quantity}</span>
