@@ -9,12 +9,21 @@ run spring cloud config server  which is runing on port number 8888 before start
 Database is implemnted in Oracle11g with following configurations. Configuraion file is stored in here https://github.com/Benzeman97/Assignment-Config-Repo 
 
 spring:
+
   datasource:
+  
     url: "jdbc:oracle:thin:@localhost:1521:orcl"
+    
     username: ASSIGNDB
+    
     password: *****
+    
     driver-class-name: oracle.jdbc.OracleDriver
+    
   jpa:
+  
     hibernate:
+    
       ddl-auto: update
+      
     database-platform: org.hibernate.dialect.Oracle10gDialect
