@@ -56,11 +56,10 @@ public class PriceServiceImpl implements PriceService {
 
         List<Product> products = new ArrayList<>();
 
-        totalPrice.getProducts().stream().forEach(p -> {
+        totalPrice.getProducts().stream().filter((product -> product.getQuantity()!=0)).forEach(p -> {
             Product product = productDAO.getProductById(p.getProductId())
                     .orElseThrow(() -> new DataNotFoundException("Product Not Found with " + p.getProductId()));
             product.setQuantity(p.getQuantity());
-            if(product.getQuantity()!=0)
             product.setPriceByUnit(priceCalculation(product.getQuantity(),product.getNumberOfUnitInCartoon(),product.getPriceOfCartoon()));
             products.add(product);
         });
