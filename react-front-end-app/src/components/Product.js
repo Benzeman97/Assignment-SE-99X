@@ -15,7 +15,7 @@ function Product({product,value}) {
                 className="img-fluid" alt="product"/>
             </div>
             <div className="col-10 mx-auto col-lg-2">
-                <span className="dg-lg-none"> product name : </span>
+                <span className="dg-lg-none"> cartoon name : </span>
                 {productName}
             </div>
             <div className="col-10 mx-auto col-lg-2">
@@ -44,7 +44,7 @@ function Product({product,value}) {
                 </div>
             </div>
             <div className="col-10 max-auto col-lg-2">
-                <strong>Product Total : $ {priceByUnit}</strong>
+                <strong>Cartoon Total : $ {priceByUnit}</strong>
             </div>
         </div>
     );

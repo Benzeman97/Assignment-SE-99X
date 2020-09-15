@@ -5,10 +5,10 @@ function ProductColumns(props) {
        <div className="container-fluid text-center d-none d-lg-block">
             <div className="row">
                 <div className="col-10 mx-auto col-lg-2">
-                   <p className="text-uppercase">Product</p>
+                   <p className="text-uppercase">Cartoon</p>
                 </div>
                 <div className="col-10 mx-auto col-lg-2">
-                   <p className="text-uppercase">Product Name</p>
+                   <p className="text-uppercase">Cartoon Name</p>
                 </div>
                 <div className="col-10 mx-auto col-lg-2">
                    <p className="text-uppercase">Cartoon Price</p>
