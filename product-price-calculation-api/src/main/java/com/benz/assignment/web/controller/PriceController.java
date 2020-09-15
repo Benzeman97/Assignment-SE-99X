@@ -26,7 +26,7 @@ public class PriceController {
         if (product.getProductId() != 0 && product.getQuantity() != 0) {
             return new ResponseEntity<>(priceService.getProductPrice(product), HttpStatus.OK);
         } else
-            throw new NullPointerException();
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
     @PostMapping(value = "/total", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
@@ -35,7 +35,7 @@ public class PriceController {
         if (totalPrice.getProducts().size() != 0)
             return new ResponseEntity<>(priceService.getTotalPrice(totalPrice), HttpStatus.OK);
         else
-            throw new NullPointerException();
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
 }
