@@ -32,7 +32,7 @@ public class ProductController {
         if (!product.getProductName().trim().isEmpty() && product.getNumberOfUnitInCartoon() != 0 && product.getPriceOfCartoon() != 0.0)
             return new ResponseEntity<>(productService.saveProduct(product), HttpStatus.OK);
         else
-            throw new NullPointerException();
+           return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
     @PutMapping(value = "/update", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
@@ -41,7 +41,7 @@ public class ProductController {
                 product.getNumberOfUnitInCartoon() != 0 && product.getPriceOfCartoon() != 0.0)
             return new ResponseEntity<Product>(productService.updateProduct(product), HttpStatus.OK);
         else
-            throw new NullPointerException();
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
     @DeleteMapping(value = "/delete", consumes = {MediaType.APPLICATION_JSON_VALUE})
@@ -51,7 +51,8 @@ public class ProductController {
                 product.getNumberOfUnitInCartoon() != 0 && product.getPriceOfCartoon() != 0.0)
             productService.deleteProduct(product);
         else
-            throw new NullPointerException();
+            throw new IllegalArgumentException();
+
     }
 
     @PostMapping(value = "/id", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
@@ -59,7 +60,7 @@ public class ProductController {
         if (product.getProductId() != 0)
             return ResponseEntity.ok(productService.getProductById(product));
         else
-            throw new NullPointerException();
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
 }
