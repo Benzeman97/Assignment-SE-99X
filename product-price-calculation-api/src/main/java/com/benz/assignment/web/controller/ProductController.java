@@ -44,12 +44,11 @@ public class ProductController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
-    @DeleteMapping(value = "/delete", consumes = {MediaType.APPLICATION_JSON_VALUE})
-    public void deleteProduct(@RequestBody Product product) throws Exception {
+    @DeleteMapping(value = "/delete/{id}")
+    public void deleteProduct(@PathVariable("id") int productId) throws Exception {
         
-        if (product.getProductId() != 0 && !product.getProductName().trim().isEmpty() &&
-                product.getNumberOfUnitInCartoon() != 0 && product.getPriceOfCartoon() != 0.0)
-            productService.deleteProduct(product);
+        if (productId != 0)
+            productService.deleteProduct(productId);
         else
             throw new IllegalArgumentException();
 

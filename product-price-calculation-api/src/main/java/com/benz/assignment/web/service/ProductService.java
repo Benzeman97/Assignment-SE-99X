@@ -10,7 +10,7 @@ public interface ProductService {
 
     Product getProductById(Product product);
 
-    void deleteProduct(Product product) throws Exception;
+    void deleteProduct(int productId) throws Exception;
 
     Product saveProduct(Product product) throws Exception;
 
