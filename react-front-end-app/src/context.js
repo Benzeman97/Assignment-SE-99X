@@ -137,9 +137,9 @@ class ProductProvider extends Component {
 
     removeProduct=(id)=>{
 
-        const product=this.state.products.find(prod=>prod.productId===id);
+      const deletedProduct=this.getProduct(id);
 
-       this.deleteProduct(product);
+       this.deleteProduct(deletedProduct);
     }
 
     render() {
