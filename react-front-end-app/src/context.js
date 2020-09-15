@@ -79,10 +79,12 @@ class ProductProvider extends Component {
 
     deleteProduct=(product)=>{
 
-        console.log(`your delete 3 ${product.productId}`)
-
-        fetch(`http://localhost:9090/products/delete/${product.productId}`,{
-            method:'DELETE'
+        fetch('http://localhost:9090/products/delete',{
+            method:'DELETE',
+            headers:{
+                'content-type':'application/json'
+            },
+            body:JSON.stringify(product)
         })
             .then(()=>{
                 this.setState({
@@ -96,7 +98,6 @@ class ProductProvider extends Component {
                     error
                 })
             });
-
     }
 
     getProduct=(id)=>{
