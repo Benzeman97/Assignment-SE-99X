@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class DataNotFoundExceptionHandler {
 
-    @ExceptionHandler
+    @ExceptionHandler(DataNotFoundException.class)
     public ResponseEntity<ErrorMessage> toResponse(DataNotFoundException ex) {
         ErrorMessage errorMessage = new ErrorMessage(404, ex.getMessage(), "");
         return new ResponseEntity<>(errorMessage, HttpStatus.NOT_FOUND);
