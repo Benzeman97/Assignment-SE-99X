@@ -35,7 +35,8 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void deleteProduct(Product product) throws Exception {
+    public void deleteProduct(int productId) throws Exception {
+        Product product=productDAO.getProductById(productId).orElseThrow(()-> new DataNotFoundException("Product Not Available with "+productId));
         productDAO.delete(product);
     }
 

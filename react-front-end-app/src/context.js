@@ -79,22 +79,16 @@ class ProductProvider extends Component {
 
     deleteProduct=(product)=>{
 
-        console.log(`Your delete ${product.productId}`)
-        console.log(`Your delete ${product.productName}`)
+        console.log(`your delete 3 ${product.productId}`)
 
-
-        fetch('http://localhost:9090/products/delete',{
-            method:'DELETE',
-            headers:{
-                'content-type':'application/json'
-            },
-            body:JSON.stringify({
-                 product:product
-            })
+        fetch(`http://localhost:9090/products/delete/${product.productId}`,{
+            method:'DELETE'
         })
             .then(()=>{
                 this.setState({
                      isLoaded:true
+                },()=>{
+                    this.getAllProducts();
                 })
             },error=>{
                 this.setState({
@@ -102,12 +96,11 @@ class ProductProvider extends Component {
                     error
                 })
             });
-        this.getAllProducts();
+
     }
 
     getProduct=(id)=>{
          const product=this.state.products.find(prod=>prod.productId===id);
-
          return product;
     }
 
@@ -143,9 +136,9 @@ class ProductProvider extends Component {
 
     removeProduct=(id)=>{
 
-       const deleteProduct= this.getProduct(id);
-       this.deleteProduct(deleteProduct);
+        const product=this.state.products.find(prod=>prod.productId===id);
 
+       this.deleteProduct(product);
     }
 
     render() {
