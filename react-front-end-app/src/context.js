@@ -78,13 +78,18 @@ class ProductProvider extends Component {
     }
 
     deleteProduct=(product)=>{
+
+        console.log(`Your delete ${product.productId}`)
+        console.log(`Your delete ${product.productName}`)
+
+
         fetch('http://localhost:9090/products/delete',{
             method:'DELETE',
             headers:{
                 'content-type':'application/json'
             },
             body:JSON.stringify({
-                product:product
+                 product:product
             })
         })
             .then(()=>{
@@ -103,7 +108,7 @@ class ProductProvider extends Component {
     getProduct=(id)=>{
          const product=this.state.products.find(prod=>prod.productId===id);
 
-         console.log(product);
+         return product;
     }
 
     increment=(id)=>{
@@ -139,16 +144,8 @@ class ProductProvider extends Component {
     removeProduct=(id)=>{
 
        const deleteProduct= this.getProduct(id);
-
        this.deleteProduct(deleteProduct);
 
-    }
-
-    addTotals=()=>{
-        let total=0.0;
-        this.state.products.map((prod)=>{
-            total+=prod.priceOfCartoon;
-        })
     }
 
     render() {
