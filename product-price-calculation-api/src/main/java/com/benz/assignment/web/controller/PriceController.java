@@ -22,7 +22,7 @@ public class PriceController {
     }
 
     @PostMapping
-    private ResponseEntity<Product> getProductPrice(@RequestBody Product product) {
+    public ResponseEntity<Product> getProductPrice(@RequestBody Product product) {
         if (product.getProductId() != 0 && product.getQuantity() != 0) {
             return new ResponseEntity<>(priceService.getProductPrice(product), HttpStatus.OK);
         } else
@@ -30,7 +30,7 @@ public class PriceController {
     }
 
     @PostMapping(value = "/total", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
-    private ResponseEntity<TotalPrice> getTotalPrice(@RequestBody TotalPrice totalPrice) {
+    public ResponseEntity<TotalPrice> getTotalPrice(@RequestBody TotalPrice totalPrice) {
 
         if (totalPrice.getProducts().size() != 0)
             return new ResponseEntity<>(priceService.getTotalPrice(totalPrice), HttpStatus.OK);
