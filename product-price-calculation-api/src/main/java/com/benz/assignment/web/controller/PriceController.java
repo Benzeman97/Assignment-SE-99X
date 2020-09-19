@@ -23,9 +23,9 @@ public class PriceController {
 
     @PostMapping
     public ResponseEntity<Product> getProductPrice(@RequestBody Product product) {
-        if (product.getProductId() != 0 && product.getQuantity() != 0) {
+        if (product.getProductId() != 0 && product.getQuantity() != 0)
             return new ResponseEntity<>(priceService.getProductPrice(product), HttpStatus.OK);
-        } else
+         else
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 

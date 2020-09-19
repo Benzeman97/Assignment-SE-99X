@@ -17,7 +17,7 @@ function ProductColumns(props) {
                    <p className="text-uppercase">Quantity</p>
                 </div>
                 <div className="col-10 mx-auto col-lg-2">
-                   <p className="text-uppercase">Remove</p>
+                   <p className="text-uppercase">Description</p>
                 </div>
                 <div className="col-10 mx-auto col-lg-2">
                    <p className="text-uppercase">Total</p>

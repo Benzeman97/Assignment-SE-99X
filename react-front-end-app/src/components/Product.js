@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
-import {faTrash} from '@fortawesome/free-solid-svg-icons';
+import {faBookReader} from '@fortawesome/free-solid-svg-icons';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 
 
 function Product({product,value}) {
 
     const {productId,productName,priceOfCartoon,urlOfImage,quantity,priceByUnit}=product;
-    const {increment,decrement,removeProduct,totalPrice}=value;
+    const {increment,decrement,description,removeProduct}=value;
 
     return (
         <div className="row my-5 text-capitalize text-center">
@@ -39,8 +39,8 @@ function Product({product,value}) {
             </div>
             {/*  */}
             <div className="col-10 mx-auto col-lg-2">
-                <div className="product-icon" onClick={()=>removeProduct(productId)}>
-                <FontAwesomeIcon className="trash" icon={faTrash}/>
+                <div className="product-icon" onClick={()=>description(productId)}>
+                <FontAwesomeIcon className="book-reader" icon={faBookReader}/>
                 </div>
             </div>
             <div className="col-10 max-auto col-lg-2">

@@ -60,7 +60,7 @@ public class PriceServiceImpl implements PriceService {
             Product product = productDAO.getProductById(p.getProductId())
                     .orElseThrow(() -> new DataNotFoundException("Product Not Found with " + p.getProductId()));
             product.setQuantity(p.getQuantity());
-            if(product.getQuantity()!=0)
+            if(isAvailable(product.getQuantity()))
             product.setPriceByUnit(priceCalculation(product.getQuantity(),product.getNumberOfUnitInCartoon(),product.getPriceOfCartoon()));
             products.add(product);
         });
@@ -70,6 +70,10 @@ public class PriceServiceImpl implements PriceService {
         return totalPrice;
     }
 
+    private boolean isAvailable(int quantity)
+    {
+        return quantity!=0;
+    }
 
     private double calculateTotalPrice(TotalPrice totalPrice) {
         double totalAmount = 0.0;
