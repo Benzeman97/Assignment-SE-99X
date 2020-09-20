@@ -3,6 +3,7 @@ import {productTotal} from './data';
 
 const ProductContext=React.createContext();
 
+
 class ProductProvider extends Component {
 
     constructor(props)
@@ -13,7 +14,7 @@ class ProductProvider extends Component {
             productSubTotal: 0,
             productTotal:0,
             isLoaded:false,
-            totalPrice:{}
+            totalPrice:{},
         }
     }
 
@@ -77,29 +78,36 @@ class ProductProvider extends Component {
 
     }
 
-    deleteProduct=(product)=>{
+    applyChanges=()=>{
 
-        fetch('http://localhost:9090/products/delete',{
-            method:'DELETE',
-            headers:{
-                'content-type':'application/json'
+        fetch('http://localhost:9090/price/total',{
+            method:'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type':'application/json'
             },
-            body:JSON.stringify(product)
-        })
-            .then(()=>{
-                this.setState({
-                     isLoaded:true
-                },()=>{
-                    this.getAllProducts();
-                })
-            },error=>{
-                this.setState({
-                    isLoaded:true,
-                    error
-                })
-            });
-    }
+            body: JSON.stringify({
 
+                    products:this.state.products
+                
+            })
+        }).then(res=>{
+            console.log(res);
+            return res.json();
+        })
+        .then(result=>{
+           this.setState({
+               isLoaded:true,
+               products:result.products
+           })
+        },error=>{
+            this.setState({
+                isLoaded:true,
+                error
+            })
+        });
+
+    }
     getProduct=(id)=>{
          const product=this.state.products.find(prod=>prod.productId===id);
          return product;
@@ -120,6 +128,10 @@ class ProductProvider extends Component {
          this.incrementAndDecrement();
     }
 
+    description=(id)=>{
+         console.log(`description is clicked by ${id}`)
+    }
+
     decrement=(id)=>{
         
         let tempProducts=[...this.state.products];
@@ -135,19 +147,12 @@ class ProductProvider extends Component {
         this.incrementAndDecrement();
     }
 
-    removeProduct=(id)=>{
-
-      const deletedProduct=this.getProduct(id);
-
-       this.deleteProduct(deletedProduct);
-    }
-
     render() {
         return (
             <ProductContext.Provider value={{...this.state,
             increment:this.increment,
             decrement:this.decrement,
-            removeProduct:this.removeProduct}}>
+            description:this.description}}>
                 {this.props.children}
                 </ProductContext.Provider>
         );
