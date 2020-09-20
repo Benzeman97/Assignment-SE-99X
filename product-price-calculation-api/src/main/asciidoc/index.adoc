@@ -1,0 +1,30 @@
+== Documentation has been documented With Spring Rest Docs
+
+=== @Author Nafaz Benzema https://www.linkedin.com/in/nafaz-benzema-020641166/
+
+This is an implementation of assignment for SE role.
+
+The application is running at http://localhost:9090:
+
+=== APIs for Price
+
+include::{snippets}/PriceControllerTest/getProductPrice/auto-section.adoc[]
+
+include::{snippets}/PriceControllerTest/getProductPrice/auto-section.adoc[]
+
+=== APIs for Product
+
+include::{snippets}/ProductControllerTest/getAllProduct/auto-section.adoc[]
+
+include::{snippets}/ProductControllerTest/getProduct/auto-section.adoc[]
+
+include::{snippets}/ProductControllerTest/saveProduct/auto-section.adoc[]
+
+include::{snippets}/ProductControllerTest/updateProduct/auto-section.adoc[]
+
+include::{snippets}/ProductControllerTest/deleteProduct/auto-section.adoc[]
+
+Spring Rest Docs is a pretty efficient way to create document for APIs and it is provided by Spring Eco System So No need to
+Use other third party frameworks like swagger for documentation.
+
+

@@ -1,5 +1,8 @@
 package com.benz.assignment.web.controller;
 
+import capital.scalable.restdocs.AutoDocumentation;
+import capital.scalable.restdocs.jackson.JacksonResultHandlers;
+import capital.scalable.restdocs.response.ResponseModifyingPreprocessors;
 import com.benz.assignment.web.entity.Product;
 import com.benz.assignment.web.model.TotalPrice;
 import com.benz.assignment.web.service.PriceService;
@@ -11,12 +14,16 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.restdocs.RestDocumentationContextProvider;
 import org.springframework.restdocs.RestDocumentationExtension;
+import org.springframework.restdocs.cli.CliDocumentation;
+import org.springframework.restdocs.http.HttpDocumentation;
 import org.springframework.restdocs.mockmvc.MockMvcRestDocumentation;
+import org.springframework.restdocs.operation.preprocess.Preprocessors;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
@@ -33,6 +40,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @ExtendWith({RestDocumentationExtension.class, SpringExtension.class})
 @WebMvcTest
+@AutoConfigureRestDocs(outputDir = "target/generated-snippets")
 public class PriceControllerTest {
 
     @MockBean
@@ -44,6 +52,9 @@ public class PriceControllerTest {
     @Autowired
     private WebApplicationContext webApplicationContext;
 
+    @Autowired
+    private ObjectMapper objectMapper;
+
     private MockMvc mockMvc;
 
 
@@ -53,6 +64,29 @@ public class PriceControllerTest {
         this.mockMvc= MockMvcBuilders
                 .webAppContextSetup(webApplicationContext)
                 .apply(MockMvcRestDocumentation.documentationConfiguration(documentationContextProvider))
+                .alwaysDo(JacksonResultHandlers.prepareJackson(objectMapper))
+                .alwaysDo(MockMvcRestDocumentation.document("{ClassName}/{methodName}",
+                        Preprocessors.preprocessRequest(),
+                        Preprocessors.preprocessResponse(
+                                ResponseModifyingPreprocessors.replaceBinaryContent(),
+                                ResponseModifyingPreprocessors.limitJsonArrayLength(objectMapper),
+                                Preprocessors.prettyPrint())))
+                .apply(MockMvcRestDocumentation.documentationConfiguration(documentationContextProvider)
+                        .uris()
+                        .withScheme("http")
+                        .withHost("localhost")
+                        .withPort(9090)
+                        .and().snippets()
+                        .withDefaults(CliDocumentation.curlRequest(),
+                                HttpDocumentation.httpRequest(),
+                                HttpDocumentation.httpResponse(),
+                                AutoDocumentation.requestFields(),
+                                AutoDocumentation.responseFields(),
+                                AutoDocumentation.pathParameters(),
+                                AutoDocumentation.requestParameters(),
+                                AutoDocumentation.description(),
+                                AutoDocumentation.methodAndPath(),
+                                AutoDocumentation.section()))
                 .build();
     }
 
