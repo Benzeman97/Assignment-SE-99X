@@ -11,7 +11,7 @@
     <groupId>com.benz.assignment</groupId>
     <artifactId>99x-assignment-se</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>99x-assignment-se</name>
+    <name>production-calculation-app</name>
     <description>Assignment For Software Engineering Role</description>
 
     <properties>
@@ -74,7 +74,6 @@
                 </exclusion>
             </exclusions>-->
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-actuator -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
