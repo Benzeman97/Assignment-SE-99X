@@ -5,6 +5,7 @@ import ProductList from './ProductList';
 import {ProductConsumer} from '../context';
 import ProductTotals from './ProductTotals';
 
+
 class PriceCalculator extends Component {
     render() {
         return (

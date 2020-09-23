@@ -1,4 +1,6 @@
 import React from 'react';
+import {ButtonContainer} from '../style-components/Button';
+
 
 function ProductTotals({value}) {
     const {totalPrice}=value;
@@ -13,6 +15,10 @@ function ProductTotals({value}) {
                                Total : <strong>${totalPrice.total}</strong>
                            </span>
                        </h3>
+                           <ButtonContainer>
+                                   Show Cartoons
+                            </ButtonContainer>
+                       
                     </div>
                 </div>
             </div>
