@@ -2,16 +2,20 @@ import React from 'react';
 import './App.css';
 import PriceCalculator from './components/PriceCalculator';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { ProductProvider } from './context';
-import {ButtonContainer} from './style-components/Button';
+import { Switch,Route } from 'react-router-dom';
+
 
 function App() {
   return (
-    <div className="App">
-      <ProductProvider>
-       <PriceCalculator/> 
-       </ProductProvider> 
-    </div>
+    
+      <React.Fragment>
+
+        <Switch>
+          <Route exact path="/" component={PriceCalculator}/>
+        </Switch>
+        
+       </React.Fragment>
+  
   );
 }
 
