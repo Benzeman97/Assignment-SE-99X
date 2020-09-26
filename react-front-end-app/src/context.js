@@ -14,6 +14,8 @@ class ProductProvider extends Component {
             productTotal:0,
             isLoaded:false,
             totalPrice:{},
+            modalOpen:false
+
         }
     }
 
@@ -107,9 +109,21 @@ class ProductProvider extends Component {
         });
 
     }
-    getProduct=(id)=>{
+    getProduct=id=>{
          const product=this.state.products.find(prod=>prod.productId===id);
          return product;
+    }
+
+    openModal=()=>{
+         this.setState(()=>{
+             return {modalOpen:true}
+         })
+    }
+
+    closeModal=()=>{
+         this.setState(()=>{
+            return { modalOpen:false}
+         })
     }
 
     increment=(id)=>{
@@ -151,7 +165,9 @@ class ProductProvider extends Component {
             <ProductContext.Provider value={{...this.state,
             increment:this.increment,
             decrement:this.decrement,
-            description:this.description}}>
+            description:this.description,
+            openModal:this.openModal,
+            closeModal:this.closeModal}}>
                 {this.props.children}
                 </ProductContext.Provider>
         );

@@ -15,15 +15,16 @@ function ProductTotals({value}) {
                                Total : <strong>${totalPrice.total}</strong>
                            </span>
                        </h3>
-                           <ButtonContainer>
-                                   Show Cartoons
-                            </ButtonContainer>
+                           <ButtonContainer onClick={ value.modalOpen?()=>value.closeModal():()=>value.openModal()}>
+                                   {value.modalOpen? <h5 className="mt-2">Close Table</h5>:
+                                    <h5 className="mt-2">Show Cartoons</h5>}
+                           </ButtonContainer>
                        
                     </div>
                 </div>
             </div>
         </React.Fragment>
     );
-}
+} 
 
 export default ProductTotals;

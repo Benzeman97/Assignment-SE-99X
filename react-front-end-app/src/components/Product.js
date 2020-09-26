@@ -6,7 +6,7 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 function Product({product,value}) {
 
     const {productId,productName,priceOfCartoon,urlOfImage,quantity,priceByUnit}=product;
-    const {increment,decrement,description,removeProduct}=value;
+    const {increment,decrement,description}=value;
 
     return (
         <div className="row my-5 text-capitalize text-center">

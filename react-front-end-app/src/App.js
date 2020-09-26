@@ -13,7 +13,7 @@ function App() {
         <Switch>
           <Route exact path="/" component={PriceCalculator}/>
         </Switch>
-        
+
        </React.Fragment>
   
   );
